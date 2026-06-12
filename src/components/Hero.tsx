@@ -4,7 +4,12 @@ import { motion } from 'framer-motion'
 import { Volume2, VolumeX, Menu, X } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 
-export function Hero() {
+// 1. Definiamo le Props che la Hero riceve dal file principale App.tsx
+interface HeroProps {
+  onNavigateToUnreleased: () => void;
+}
+
+export function Hero({ onNavigateToUnreleased }: HeroProps) {
   const [isMuted, setIsMuted] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -14,14 +19,14 @@ export function Hero() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
-      setIsScrolled(scrollTop > 50) // Show background after 50px scroll
+      setIsScrolled(scrollTop > 50)
     }
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Ensure video is muted immediately on load to prevent any audio
+  // Ensure video is muted immediately on load
   useEffect(() => {
     if (videoRef.current) {
       console.log('Video element found, setting up...')
@@ -29,23 +34,13 @@ export function Hero() {
       videoRef.current.muted = true
       videoRef.current.defaultMuted = true
       
-      // Add event listeners for debugging
-      videoRef.current.addEventListener('loadstart', () => console.log('Video: loadstart'))
-      videoRef.current.addEventListener('loadedmetadata', () => console.log('Video: loadedmetadata'))
-      videoRef.current.addEventListener('canplay', () => console.log('Video: canplay'))
-      videoRef.current.addEventListener('playing', () => console.log('Video: playing'))
-      videoRef.current.addEventListener('error', (e) => console.error('Video error:', e))
-      
-      // Force mute on play
       videoRef.current.addEventListener('play', () => {
         if (videoRef.current) {
-          console.log('Video play event fired')
           videoRef.current.muted = isMuted
           videoRef.current.volume = isMuted ? 0 : 0.7
         }
       })
       
-      // Try to play the video
       const playPromise = videoRef.current.play()
       if (playPromise !== undefined) {
         playPromise
@@ -55,7 +50,7 @@ export function Hero() {
     }
   }, [])
 
-  // Update video mute state when isMuted changes
+  // Update video mute state
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.muted = isMuted
@@ -63,15 +58,13 @@ export function Hero() {
     }
   }, [isMuted])
 
-  // Handle body scroll lock when mobile menu is open
+  // Handle body scroll lock
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden'
     } else {
       document.body.style.overflow = 'unset'
     }
-
-    // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset'
     }
@@ -84,21 +77,17 @@ export function Hero() {
         setIsMobileMenuOpen(false)
       }
     }
-
     if (isMobileMenuOpen) {
       window.addEventListener('scroll', handleScroll)
     }
-
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [isMobileMenuOpen])
 
-
-
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black">
-      {/* MASSIVE VIDEO - Takes up 95% of space */}
+      {/* MASSIVE VIDEO */}
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover scale-110"
@@ -107,7 +96,7 @@ export function Hero() {
         loop
         playsInline
       >
-        <source src="https://mojli.s3.us-east-2.amazonaws.com/Mojli+Website+upscaled+(12mb).webm" type="video/webm" />
+        <source src="/background.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -130,50 +119,35 @@ export function Hero() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="flex items-center cursor-pointer"
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-              }}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <span className="font-bagel text-white text-xl tracking-wider">MOJJU</span>
+              <span className="font-bagel text-white text-xl tracking-wider">999 Gallery</span>
             </motion.div>
 
-            {/* Navigation Menu */}
+            {/* Navigation Menu Desktop */}
             <div className="hidden md:flex items-center space-x-8">
-              <a 
-                href="#portfolio" 
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
+              <a href="#portfolio" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
                 Work
               </a>
-              <a 
-                href="#about" 
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                Process
+              <a href="#awards" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
+                Community
               </a>
-              <a 
-                href="#services" 
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                Capabilities
+              <a href="#about" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
+                About
               </a>
-              <a 
-                href="#team" 
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
-                Team
+              <a href="#services" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
+                Songs Download
               </a>
-              <a 
-                href="#contact" 
-                className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105"
-              >
+              <a href="#team" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
+                Growth
+              </a>
+              <a href="#contact" className="text-white hover:text-white/80 font-medium gentle-animation hover:scale-105">
                 Contact
               </a>
             </div>
 
             {/* Right Side - Video Controls + CTA + Mobile Menu */}
             <div className="flex items-center space-x-3 relative">
-              {/* Video Controls with Sound On indicator */}
               <div className="relative">
                 <button
                   onClick={() => setIsMuted(!isMuted)}
@@ -181,8 +155,6 @@ export function Hero() {
                 >
                   {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                 </button>
-                
-                {/* Sound On indicator - only show when muted */}
                 {isMuted && (
                   <div className="absolute -bottom-10 right-0 flex items-center text-white/80">
                     <span className="whitespace-nowrap font-medium text-sm mr-2">Sound On</span>
@@ -191,17 +163,14 @@ export function Hero() {
                 )}
               </div>
               
-              {/* CTA Button - Hidden on mobile */}
+              {/* BOTTONE ROSSO DESKTOP MODIFICATO */}
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => {
-                  const contactSection = document.getElementById('contact')
-                  contactSection?.scrollIntoView({ behavior: 'smooth' })
-                }}
+                onClick={onNavigateToUnreleased}
                 className="hidden sm:block bg-red-600 backdrop-blur-sm text-white font-semibold px-6 py-3 rounded-md hover:bg-red-700 gentle-animation ml-4 cursor-pointer"
               >
-                Book a Call
+                Download Songs
               </motion.button>
 
               {/* Mobile Hamburger Menu Button */}
@@ -237,7 +206,6 @@ export function Hero() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col h-full">
-          {/* Close Button at the top */}
           <div className="flex justify-end p-4">
             <button
               onClick={() => setIsMobileMenuOpen(false)}
@@ -248,81 +216,73 @@ export function Hero() {
           </div>
           
           <div className="flex flex-col px-6 pb-6 h-full">
-            {/* Mobile Navigation Links */}
             <div className="flex flex-col space-y-4 text-white">
-              <a 
-                href="#portfolio" 
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <a href="#portfolio" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg" onClick={() => setIsMobileMenuOpen(false)}>Work</a>
+              <a href="#awards" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg" onClick={() => setIsMobileMenuOpen(false)}>Community</a>
+              <a href="#about" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg" onClick={() => setIsMobileMenuOpen(false)}>About</a>
+              
+              {/* Menu Mobile: link indirizzato alla funzione */}
+              <button 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  onNavigateToUnreleased();
+                }}
+                className="mobile-menu-link text-left px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg cursor-pointer bg-transparent border-none"
               >
-                Work
-              </a>
-              <a 
-                href="#about" 
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Process
-              </a>
-              <a 
-                href="#services" 
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Capabilities
-              </a>
-              <a 
-                href="#team" 
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Team
-              </a>
-              <a 
-                href="#contact" 
-                className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg active:bg-white/20"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </a>
+                Songs Download
+              </button>
+
+              <a href="#team" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg" onClick={() => setIsMobileMenuOpen(false)}>Growth</a>
+              <a href="#contact" className="mobile-menu-link px-4 py-3 hover:text-white/80 hover:bg-white/10 rounded-lg gentle-animation font-medium text-lg" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
             </div>
 
-            {/* Mobile CTA Button */}
+            {/* BOTTONE ROSSO MOBILE MODIFICATO */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                const contactSection = document.getElementById('contact')
-                contactSection?.scrollIntoView({ behavior: 'smooth' })
-                setIsMobileMenuOpen(false)
+                setIsMobileMenuOpen(false);
+                onNavigateToUnreleased();
               }}
               className="bg-red-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-red-700 active:bg-red-800 gentle-animation mt-8 cursor-pointer"
             >
-              Book a Call
+              Download Songs
             </motion.button>
           </div>
         </div>
       </motion.div>
 
-
-
       {/* Big Studio Title - Lower Left */}
       <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 1.5 }}
         className="absolute bottom-12 left-6 sm:left-8 lg:left-12 z-40"
       >
         <div className="max-w-2xl">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight text-white">
-            <span className="block">AI FILM</span>
-            <span className="block">PRODUCTION</span>
-            <span className="block">WITHOUT LIMITS</span>
+          {/* Piccolo indicatore di posizione corrente con Fade Arancione */}
+          <div className="flex items-center space-x-2 mb-3">
+            {/* Ho allungato leggermente la barretta verticale per seguire l'altezza del testo */}
+            <span className="h-4 w-0.5 rounded-full bg-amber-500" />
+            <span className="text-lg font-black tracking-widest uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-orange-600">
+              HOME
+            </span>
+          </div>
+
+          {/* Titolo principale */}
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-none text-white tracking-tight uppercase space-y-1">
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400">
+              JUICE WRLD
+            </span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400">
+              UNRELEASED ALBUMS
+            </span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-zinc-400">
+              PRODUCTION
+            </span>
           </h1>
         </div>
       </motion.div>
-
-
     </div>
   )
 }

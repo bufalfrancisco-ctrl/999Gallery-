@@ -2,17 +2,17 @@
 
 export function Footer() {
   const aiTools = [
-    'Runway Gen-4',
-    'Kling 2', 
-    'Veo 3',
-    'Higgsfield AI',
-    'Hailuo Minimax 2',
-    'Midjourney',
-    'Leonardo AI',
-    'Krea AI',
-    'Runway',
-    'Suno AI',
-    'ElevenLabs'
+    'Spotify', 
+    'Apple Music / ITunes',
+    'Juice Fanbase',
+    'Genius',
+    'TikTok',
+    'Gemini',
+    'Google Drive',
+    'Audio Editor',
+    'Remixing Softwares',
+    'Photoshop',
+    'Discord'
   ]
 
   return (
@@ -23,17 +23,16 @@ export function Footer() {
           <div className="col-span-12 md:col-span-4">
             <div>
               <div className="font-bagel text-background text-3xl tracking-wider mb-4">
-                MOJJU
+                999 Gallery
               </div>
               <p className="text-background/70 leading-relaxed mb-6">
-                Revolutionizing video production with intelligent AI that understands 
-                creativity, storytelling, and human emotion.
+                This website is a dedicated archive for cataloging and preserving Juice WRLD's unreleased music, organized into era-accurate conceptual albums. Through custom fan-art and creative content, it allows the community to discover the artist's hidden musical history and integrate tracks into their local playback systems.
               </p>
               {/* Social Media Icons */}
               <div className="flex items-center space-x-6">
                 {/* X (Twitter) */}
                 <a
-                  href="https://x.com/Mojjuai"
+                  href="https://x.com/JuiceWorlddd"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:scale-110 gentle-animation cursor-pointer"
@@ -43,21 +42,28 @@ export function Footer() {
                   </svg>
                 </a>
 
-                {/* TikTok */}
+                {/* TikTok con i Colori Originali del Logo Vero */}
                 <a
-                  href="https://www.tiktok.com/@mojju.ai"
+                  href="https://www.tiktok.com/@_wrldplug_"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:scale-110 gentle-animation cursor-pointer"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF0050">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="url(#tiktok-gradient)">
+                    <defs>
+                      <linearGradient id="tiktok-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#00f2fe" />
+                        <stop offset="50%" stopColor="#4facfe" />
+                        <stop offset="100%" stopColor="#fe0979" />
+                      </linearGradient>
+                    </defs>
                     <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.936-1.315-2.117-1.315-3.338h-3.357v14.826c0 1.543-1.252 2.795-2.795 2.795s-2.795-1.252-2.795-2.795 1.252-2.795 2.795-2.795c.293 0 .576.045.843.13V9.804a6.67 6.67 0 0 0-.843-.054c-3.683 0-6.674 2.99-6.674 6.674s2.99 6.674 6.674 6.674 6.674-2.99 6.674-6.674V9.696a9.577 9.577 0 0 0 5.588 1.786V7.627c-1.319 0-2.54-.529-3.42-1.394a4.902 4.902 0 0 1-1.294-2.671z"/>
                   </svg>
                 </a>
 
                 {/* Instagram */}
                 <a
-                  href="https://www.instagram.com/mojju.ai"
+                  href="https://www.instagram.com/juicewrld999/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:scale-110 gentle-animation cursor-pointer"
@@ -74,17 +80,30 @@ export function Footer() {
                   </svg>
                 </a>
 
-                {/* LinkedIn */}
+                {/* YouTube */}
                 <a
-                  href="https://linkedin.com/company/mojju"
+                  href="https://www.youtube.com/@JuiceWRLD"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:scale-110 gentle-animation cursor-pointer"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#0077B5">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF0000">
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </a>
+
+                {/* Spotify */}
+                <a
+                  href="https://open.spotify.com/user/31oikbbhvrnzedjjrjlndodslxbm?si=79b465c8c34b4572"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:scale-110 gentle-animation cursor-pointer"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#1ED760">
+                    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.494 17.307c-.215.352-.677.463-1.03.248-2.862-1.748-6.464-2.144-10.706-1.177-.403.092-.806-.162-.899-.564-.092-.403.162-.806.564-.899 4.604-1.052 8.567-.604 11.785 1.357.353.215.464.677.248 1.035zm1.467-3.26c-.27 1.439-.44 1.116-.713.94-3.284-2.02-8.293-2.607-12.176-1.428-.49.148-1.01-.132-1.158-.623-.148-.49.132-1.01.623-1.158 4.437-1.347 9.948-.7 13.684 1.597.43.265.57.82.302 1.25-.214.34-.393.163-.562.422zm.126-3.376C15.02 8.22 8.318 8 4.432 9.18c-.61.184-1.255-.168-1.44-.777-.183-.61.168-1.255.777-1.44 4.464-1.353 11.874-1.097 16.53 1.667.548.324.728 1.033.4 1.58-.323.547-1.032.728-1.58.4z"/>
+                  </svg>
+                </a>
+
               </div>
             </div>
           </div>
@@ -96,8 +115,7 @@ export function Footer() {
               
               {/* AI Tools Description */}
               <p className="text-background/70 text-base mb-8 leading-relaxed">
-                We leverage the latest AI technology to deliver cutting-edge video production. 
-                Our toolkit combines the best generative AI models for video, audio, and visual content creation.
+                We create and share our visual concepts and album previews directly on TikTok to connect with the community. All the high-quality unreleased tracks are securely hosted on Google Drive, making it easy for fans to download the files. Once saved, supporters can easily import them into their personal Spotify or Apple Music libraries using the local files feature to listen anywhere.
               </p>
               
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -114,14 +132,14 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar - Simplified */}
+        {/* Bottom Bar - Email Aggiornata */}
         <div className="border-t border-background/20 pt-8 mt-16">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-sm text-background/70 mb-4 md:mb-0">
-              © 2025 MOJJU. All rights reserved.
+              © 2026 999 GALLERY. All rights reserved.
             </div>
             <div className="text-sm text-background/70">
-              2847 HIGHLAND AVE. SUITE 310 BIRMINGHAM 35205, AL, USA
+              Contact Team: jwrldplug@gmail.com
             </div>
           </div>
         </div>
